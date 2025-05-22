@@ -51,7 +51,7 @@ const ProductDetail = () => {
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>PricePerUnit:&nbsp;</span> {product.pricePerUnit}</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Mode:&nbsp;</span> {product.mode}</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Description: &nbsp;</span>{product.description}</h1>
-      <button className="btn btn-primary w-5/6 ml-7 mt-5  " onClick={() => addToCart(product._id, product.name, product.price, 1, product.image)}>Add To Cart</button>
+      <button className="btn btn-primary w-5/6 ml-7 mt-5  " onClick={() => addToCart(product._id, product.name, product.price, 1, product.image,"productPage")}>Add To Cart</button>
       </div>
       <div className='w-full md:w-2/12'></div>
 
