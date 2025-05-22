@@ -6,7 +6,7 @@ import { Link,  useNavigate } from 'react-router-dom';
 
 const Adminshowproduct = () => {
   const navigate = useNavigate();
-    const url = "http://localhost:3000/api"
+    const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api"
     const deleteitem = async (id)=> {
         console.log(id)
         const api = await axios.delete(`${url}/product/${id}`)
