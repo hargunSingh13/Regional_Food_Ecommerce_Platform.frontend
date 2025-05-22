@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
 const AdminEditProduct = () => {
-  const url = "http://localhost:3000/api";
+  const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api";
   const {id} = useParams();
 
       const [name, setName] = useState("");
