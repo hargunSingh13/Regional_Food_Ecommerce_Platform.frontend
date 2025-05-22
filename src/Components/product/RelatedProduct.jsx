@@ -31,7 +31,7 @@ const RelatedProduct = ({ mode }) => {
               <p className='text-gray-600 text-sm'>{i.description}</p>
               <div className=" flex justify-between items-center mt-3 card-actions justify-end">
                 <span className='text-lg font-bold text-green-600'>₹{i.price}/{i.pricePerUnit}</span>
-                <button className="btn btn-primary" onClick={() => addToCart(i._id, i.name, i.price, 1, i.image)}>Add To Cart</button>
+                <button className="btn btn-primary" onClick={() => addToCart(i._id, i.name, i.price, 1, i.image,"productPage")}>Add To Cart</button>
               </div>
             </div>
           </div>
