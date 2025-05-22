@@ -5,7 +5,7 @@ import { toast, Slide,Bounce } from 'react-toastify';
 import { connect } from 'mongoose';
 
 const AppState = (props) => {
-    const url = "http://localhost:3000/api";
+    const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api";
     const [products, setProducts] = useState([]);
     const [token, setToken] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
