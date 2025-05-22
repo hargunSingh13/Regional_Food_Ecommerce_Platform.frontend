@@ -2,7 +2,7 @@ import React, { useEffect ,useState} from 'react'
 import AppContext from './AppContext'
 import axios from 'axios';
 import { toast, Slide,Bounce } from 'react-toastify';
-import { connect } from 'mongoose';
+// import { connect } from 'mongoose';
 
 const AppState = (props) => {
     const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api";
