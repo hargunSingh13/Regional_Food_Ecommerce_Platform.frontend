@@ -10,7 +10,7 @@ import Footer from '../Footer';
 const ProductDetail = () => {
   const [product, setProduct] = useState("");
   const {id} = useParams();
-  const url = 
+  const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api"
   const {addToCart} = useContext(AppContext);
 
   useEffect(()=>{
