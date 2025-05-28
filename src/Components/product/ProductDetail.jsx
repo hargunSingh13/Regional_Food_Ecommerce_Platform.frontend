@@ -10,7 +10,7 @@ import Footer from '../Footer';
 const ProductDetail = () => {
   const [product, setProduct] = useState("");
   const {id} = useParams();
-  const url = "https://regional-food-ecommerce-platform-backend.onrender.com/api"
+  const url = 
   const {addToCart} = useContext(AppContext);
 
   useEffect(()=>{
@@ -33,9 +33,9 @@ const ProductDetail = () => {
     <>
     <Headder />
 
-    <div className='flex mt-3'>
-      <div className='w-full md:w-2/12'></div>
-      <div className='w-full md:w-5/12  shadow-xl rounded-l-3xl border '>
+    <div className='flex flex-col md:flex-row mt-3 w-ful mx-auto'>
+      <div className='hidden md:block md:w-2/12'></div>
+      <div className='w-full md:w-5/12 shadow-xl rounded-l-3xl border '>
         <h1 className='text-4xl font-semibold flex justify-center mb-4'>{product.name}</h1>
         <img src={product.image} alt={product.name} className=' w-full h-96 object-cover flex justify-center mb-5'/>
         <div className=" flex   mt-3 mb-3  justify-end">
@@ -43,7 +43,7 @@ const ProductDetail = () => {
         
         </div>
       </div>
-      <div className='w-full md:w-3/12  shadow-xl justify-center rounded-r-3xl border'>
+      <div className='w-full md:w-3/12 shadow-xl rounded-r-3xl border'>
       <h1 className='text-4xl font-semibold flex justify-center mb-4'>Details</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Name: &nbsp;</span> {product.name}</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Origin:&nbsp;</span>{product.origin}</h1>
@@ -51,9 +51,9 @@ const ProductDetail = () => {
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>PricePerUnit:&nbsp;</span> {product.pricePerUnit}</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Mode:&nbsp;</span> {product.mode}</h1>
       <h1 className='text-2xl ml-5 pl-3  mb-2'><span className='font-medium'>Description: &nbsp;</span>{product.description}</h1>
-      <button className="btn btn-primary w-5/6 ml-7 mt-5  " onClick={() => addToCart(product._id, product.name, product.price, 1, product.image,"productPage")}>Add To Cart</button>
+      <button className="btn btn-primary w-full md:w-5/6 ml-0 md:ml-7 mt-5 " onClick={() => addToCart(product._id, product.name, product.price, 1, product.image,"productPage")}>Add To Cart</button>
       </div>
-      <div className='w-full md:w-2/12'></div>
+      <div className='hidden md:block md:w-2/12'></div>
 
     </div>
 
@@ -64,3 +64,4 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
+
