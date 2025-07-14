@@ -1,172 +1,205 @@
-import React, { useContext, useState,useEffect } from 'react'
+import React, { useContext, useState } from 'react';
 import AppContext from '../Context/AppContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Headder = () => {
-  const {isAuthenticated, products, setFilterData, Logoutuser, cart, sum, setHeading} = useContext(AppContext);
+  const {
+    isAuthenticated,
+    products,
+    setFilterData,
+    Logoutuser,
+    cart,
+    sum,
+  } = useContext(AppContext);
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("")
-  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const savedMode = localStorage.getItem('selectedMode');
-  //   if (savedMode) {
-  //     setFilterData(
-  //       products.filter(
-  //         (product) => product.mode.toLowerCase() === savedMode.toLowerCase()
-  //       )
-  //     );
-  //     setHeading(`Explore ${savedMode.toUpperCase()} FOOD`);
-  //   }
-  // }, [products])
-
-  const formHandler = (e)=> {
+  const formHandler = (e) => {
     e.preventDefault();
     navigate(`/product/search/${searchTerm}`);
-    setSearchTerm("")
-  }
-  
+    setSearchTerm('');
+    setIsDropdownOpen(false);
+  };
 
-  const filterbyMode = (mod)=>{
-    console.log("mode",mod)
-    //window.location.reload();
-    // navigate('/')
-    // localStorage.setItem('selectedMode', mod);
-    setFilterData(
-      // products.filter((product)=> product.mode.toLowerCase() === mod.toLowerCase())
-      navigate(`/category/${mod}`)
-    )
+  const filterbyMode = (mod) => {
+    navigate(`/category/${mod}`);
+    setIsDropdownOpen(false);
+  };
 
-    
-  }
+  const filterByBestSeller = () => {
+    navigate('/');
+    setFilterData(products.filter((p) => p.bestSeller === 'Yes'));
+    setIsDropdownOpen(false);
+  };
 
-  const filterByBestSeller = ()=>{
-    
+  const profileActions = (
+    <>
+      {!isAuthenticated ? (
+        <>
+          <li>
+            <a href="/log">Login</a>
+          </li>
+          <li>
+            <a href="/reg">Register</a>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            {/* <a onClick={() => navigate('/userOrders')}> */}
+            <Link to="/userOrders">
+            <a >
+              All Orders
+            </a>
+            </Link>
+          </li>
+          <li>
+           <button
+  className="menu-item"
+  onClick={() => {
+    Logoutuser();
+    navigate('/log');
+    setIsDropdownOpen(false);
+  }}
+>
+  Logout
+</button>
 
-    navigate('/')
-    setFilterData(
-      products.filter((product)=> product.bestSeller === "Yes")
-    )
-    
-  }
+          </li>
+        </>
+      )}
+    </>
+  );
+
   return (
-    <div className='w-full'>
-      <div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-xl" onClick={()=> {filterByBestSeller()}}>All</a>
-    <a className="btn btn-ghost text-xl" onClick={()=>{filterbyMode('Sweet')}}>SWEET</a>
-    <a className="btn btn-ghost text-xl" onClick={()=>{filterbyMode("Spicy")}}>SPICY</a>
-    <a className="btn btn-ghost text-xl" onClick={()=>{filterbyMode("Snacks")}}>EVENING SNACKS</a>
-    <a className="btn btn-ghost text-xl" onClick={()=>{filterbyMode("Others")}}>OTHER</a>
-  </div>
+    <div className="w-full bg-base-100">
+      <div className="navbar flex-wrap justify-between px-4 py-2">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold text-orange-600">Flavors of India</h1>
 
-  {/* <nav className="bg-gradient-to-r from-orange-400 to-red-500 shadow-md"> */}
-  <div className="max-w-7xl mx-auto px-4 py-3 flex justify-center items-center">
-    <div className="flex items-center">
-      <h1 className="text-4xl font-extrabold bg-gradient-to-r tracking-wider italic from-yellow-300 via-orange-500 to-red-600 text-transparent bg-clip-text">
-        Flavors of India
-      </h1>
-    </div>
-  </div>
+        {/* Desktop Mode Options */}
+        <div className="hidden md:flex space-x-4">
+          <button onClick={filterByBestSeller} className="btn btn-ghost">
+            All
+          </button>
+          <button onClick={() => filterbyMode('Sweet')} className="btn btn-ghost">
+            SWEET
+          </button>
+          <button onClick={() => filterbyMode('Spicy')} className="btn btn-ghost">
+            SPICY
+          </button>
+          <button onClick={() => filterbyMode('Snacks')} className="btn btn-ghost">
+            EVENING SNACKS
+          </button>
+          <button onClick={() => filterbyMode('Others')} className="btn btn-ghost">
+            OTHER
+          </button>
+        </div>
 
-
-
-
-
-  
-
-  <div className="flex-none">
-    <form onSubmit={formHandler}>
-  <div className="form-control ">
-      <input type="text" value={searchTerm} onChange={(e)=> setSearchTerm(e.target.value)} placeholder="Search" className="input input-bordered w-24 md:w-auto "  />
-    </div>
-    </form>
-    <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-      
-        <div className="indicator">
+        {/* Hamburger Toggle for Mobile */}
+        <button
+          className="md:hidden btn btn-ghost"
+          onClick={() => setIsDropdownOpen((prev) => !prev)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <span className="badge badge-sm indicator-item bg-warning">  {cart?.items?.length} </span>
-        </div>
-      </div>
-      <div
-        tabIndex={0}
-        className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-        <div className="card-body">
-          <span className="text-lg font-bold">{cart?.items?.length} Items</span>
-          
-            
-              
-          <span className="text-blue-700">Subtotal: Rs{sum}</span>
-          <div className="card-actions">
-            <button className="btn btn-primary btn-block" onClick={
-              ()=>{
-                navigate('/cart')
-              }
-            }>View cart</button>
+        </button>
+
+        {/* Common area: Search, Cart, Avatar */}
+        <div className="flex space-x-4 items-center flex-wrap">
+          <form onSubmit={formHandler}>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </form>
+
+          {/* Cart */}
+          <div className="dropdown dropdown-end">
+            <button className="btn btn-ghost btn-circle">
+              <div className="indicator">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                <span className="badge badge-sm indicator-item bg-warning">{cart?.items?.length}</span>
+              </div>
+            </button>
+            <div className="card card-compact dropdown-content bg-base-100 mt-3 w-52 shadow z-[1]">
+              <div className="card-body">
+                <span className="text-lg font-bold">{cart?.items?.length} Items</span>
+                <span className="text-blue-700">Subtotal: Rs{sum}</span>
+                <button className="btn btn-primary btn-block" onClick={() => navigate('/cart')}>
+                  View cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* User Avatar */}
+          <div className="dropdown dropdown-end">
+            <button className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  alt="User Avatar"
+                />
+              </div>
+            </button>
+            <ul className="menu menu-sm dropdown-content bg-base-100 mt-3 w-52 p-2 shadow z-[1]">
+              {profileActions}
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-    <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+
+      {/* Mobile Dropdown Menu */}
+      {isDropdownOpen && (
+        <div className="md:hidden flex flex-col space-y-2 px-4 pb-4 bg-base-100">
+          <button onClick={filterByBestSeller} className="btn btn-ghost w-full text-left">
+            All
+          </button>
+          <button onClick={() => filterbyMode('Sweet')} className="btn btn-ghost w-full text-left">
+            SWEET
+          </button>
+          <button onClick={() => filterbyMode('Spicy')} className="btn btn-ghost w-full text-left">
+            SPICY
+          </button>
+          <button onClick={() => filterbyMode('Snacks')} className="btn btn-ghost w-full text-left">
+            EVENING SNACKS
+          </button>
+          <button onClick={() => filterbyMode('Others')} className="btn btn-ghost w-full text-left">
+            OTHER
+          </button>
+          <hr />
+          <ul className="menu menu-sm">
+            {profileActions}
+          </ul>
         </div>
-      </div>
-      <ul
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-       {!isAuthenticated &&(
-        <>
-       <li>
-          <a className="justify-between" href='/log'>
-            Login
-          </a>
-        </li>
-        <div className='flex'>
-        <p>New customer?  &nbsp;  &nbsp;  &nbsp;</p> <a class=' decoration-blue-800 underline '  href="/reg"><p className='text-blue-500'>Register</p></a>
-        </div>
-        </>
-       )}
-       
-       {isAuthenticated &&(
-        <>
-        <li>
-          <a onClick={()=> navigate('/userOrders')}>All Orders</a>
-        </li>
-        <li>
-          <a onClick={()=>{Logoutuser();
-            navigate('/log');
-          }}>Logout</a>
-        </li>
-        </>
-       )}
-        
-       
-        
-      </ul>
-    
+      )}
     </div>
-  </div>
-</div>
+  );
+};
 
-
-    </div>
-  )
-}
-
-export default Headder
+export default Headder;
