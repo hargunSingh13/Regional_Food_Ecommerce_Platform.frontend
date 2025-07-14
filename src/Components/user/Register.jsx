@@ -83,7 +83,7 @@ const Register = () => {
   <input value = {password} onChange={(e)=>setPassword(e.target.value)}  type="password" className="grow" placeholder="Password" required />
 </label>
 <center>
-<button type='submit' className='btn btn-primary mt-5 w-96'>Submit</button>
+<button type='submit' className='btn btn-primary mt-5 w-48'>Submit</button>
 </center>
         </form>
         
