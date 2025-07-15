@@ -121,7 +121,7 @@ const Headder = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-40 max-w-xs"
             />
           </form>
 
@@ -167,7 +167,7 @@ const Headder = () => {
                 />
               </div>
             </button>
-            <ul className="menu menu-sm dropdown-content bg-base-100 mt-3 w-52 p-2 shadow z-[1]">
+            <ul className="menu menu-sm dropdown-content bg-base-100 mt-3 w-24 p-2 shadow z-[1]">
               {profileActions}
             </ul>
           </div>
