@@ -31,7 +31,7 @@ Database: MongoDB
 Payments: Razorpay integration
 Version Control & Deployment: GitHub, (deployed on Render/Vercel
 
-- # frontend
+# frontend
 npm install
 npm run dev
 
@@ -39,4 +39,5 @@ npm run dev
 npm install
 npm start
 
-# Live link  
+# Live link 
+https://regional-food-ecommerce-platform-frontend.vercel.app/
