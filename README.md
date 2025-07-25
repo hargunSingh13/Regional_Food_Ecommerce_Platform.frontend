@@ -7,14 +7,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- # frontend
-npm install
-npm run dev
-
-# backend
-npm install
-npm start
-
+# Concept
 - Designed and built a full‑stack web platform (MERN stack) to connect users with authentic regional food products from parent states across India.“Flavors of India” is an online marketplace designed to bring authentic, regional culinary specialties from across India directly to users' doorsteps. The platform acts as a bridge between local foodmakers in various states and consumers who crave traditional flavors. Shoppers can discover, explore, and purchase unique homemade products—like artisanal pickles, regional snacks, spice mixes, sweets, and handcrafted food items—while local producers gain access to a broader customer base.
 
 Key Contributions
@@ -37,3 +30,13 @@ Backend: Node.js, Express.js, JWT, bcrypt
 Database: MongoDB
 Payments: Razorpay integration
 Version Control & Deployment: GitHub, (deployed on Render/Vercel
+
+- # frontend
+npm install
+npm run dev
+
+# backend
+npm install
+npm start
+
+# Live link  
